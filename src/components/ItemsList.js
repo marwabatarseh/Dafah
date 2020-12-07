@@ -40,7 +40,7 @@ class ItemsList extends Component {
     }
 
     componentDidMount() {
-         axios.get("https://safe-earth-24175.herokuapp/addItems/")   
+         axios.get("http://localhost:3000/addItems/")   
             .then( res => {
                 this.setState({items: res.data})
             })
@@ -50,7 +50,7 @@ class ItemsList extends Component {
     }
 
     deleteItem(id) {
-        axios.delete("https://safe-earth-24175.herokuapp/addItems/" + id)
+        axios.delete("http://localhost:3000/addItems/" + id)
             .then(res => console.log(res.data));
         this.setState({
             items: this.state.items.filter(el => el._id !== id)
