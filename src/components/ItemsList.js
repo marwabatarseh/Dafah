@@ -2,10 +2,13 @@ import React, { Component } from "react";
 import { Link ,withRouter } from "react-router-dom" ;
 import axios from "axios";
 import Footer from './Footer';
+import Search from './Search.js';
+
 
 //
 const ClothesItem = props => (
     <tr>
+
         <td>{props.item.itemName}</td>
         <td>{props.item.category}</td>
         <td>{props.item.type}</td>
@@ -80,6 +83,7 @@ class ItemsList extends Component {
 
         return (
             <div>
+                  <Search/>
             <br />
             <div className = "container text-center border border-light p-9">
                 <h2>Clothing</h2>
@@ -100,6 +104,7 @@ class ItemsList extends Component {
                 </tbody>
                 </table>
             </div>
+          
             <Footer />
             </div>
         )
