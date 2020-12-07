@@ -13,6 +13,7 @@ const ClothesItem = props => (
         <td>{props.item.category}</td>
         <td>{props.item.type}</td>
         <td>{props.item.description}</td>
+        <td>{props.item.phoneNumber}</td>
         
         <td>
         <img src= {props.item.image} width="200" height="200" class="w3-round" alt="Norway"/>
@@ -38,7 +39,7 @@ class ItemsList extends Component {
         this.state = {
             items: [],
             filteredItems :[],
-            SearchString:'',
+            // SearchString:''
             category:""
         }
     }
@@ -61,11 +62,7 @@ class ItemsList extends Component {
         })
     }
 
-    onchangeCategory (e){
-        this.setState({
-            category:e.target.value
-        });
-    }
+   
 
     itemsList() {
         let listedItems = (this.state.filteredItems.length > 0)? this.state.filteredItems : this.state.items; 
@@ -74,27 +71,51 @@ class ItemsList extends Component {
             return <ClothesItem item = { currentItem } deleteItem = { this.deleteItem } key = { currentItem._id }/>; 
         })
     } 
-
+    // onChangecategoryHandler(event) {
+    //     this.setState(
+    //       {
+    //         category: event.target.value,
+    //       }
+    //     );
+    //   }
     onSearch = e => {
         let { items } = this.state
         let string = e.target.value
         if(string.length > 0){
-           let filteredItems = items.filter(item => item.itemName.includes(string))
-           this.setState({SearchString:string,filteredItems:filteredItems})
+           let filteredItems = items.filter(item => item.category.includes(string))
+           this.setState({category:string,filteredItems:filteredItems})
         }
-        else this.setState({SearchString:string,filteredItems:[]})
+        else this.setState({category:string,filteredItems:[]})
     }
+// onFilter(e){
+//     var category = e.target.value
+//     if(category.length > 0){
+//          let filteredItems = items.filter(item => item.itemName.includes(category))
+//          this.setState({category:category,filteredItems:filteredItems})
+//      }
+//     else this.setState({category:category,filteredItems:[]})
 
+// }
 
     render() {
 
         return (
             <div>
-                  <Search/>
+                  {/* <Search/> */}
             <br />
             <div className = "container text-center border border-light p-9">
                 <h2>Clothing</h2>
-                <input name="search" className="form-control" onChange={e => this.onSearch(e)} value={this.state.SearchString}  placeholder="Search for item Name"/>
+                <select name="category" id="category"
+     native
+    value={this.state.category}
+    onChange={e => this.onSearch(e)}
+    >
+    <option value="">Please choose by Category</option>
+    <option value="women">Women</option>
+    <option value="men">Men</option>
+    <option value="kids">Kids</option>
+  </select>
+                <input name="search" className="form-control"  value={this.state.SearchString} onChange={e => this.onSearch(e)} placeholder="Search for item Name"/>
                 <table className = "table">
                 <thead className = "thead">
                     <tr>
@@ -102,6 +123,7 @@ class ItemsList extends Component {
                         <th>Category</th>
                         <th>Type</th>
                         <th>Description</th>
+                        <th>Donor Phone Number</th>
                         <th>Image</th>
                         
                     </tr>
