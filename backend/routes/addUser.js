@@ -30,19 +30,21 @@ router.route('/').get((req, res) => {
   //sorry it is a mass it is leterlly 2 am
   const salt = await bcrypt.genSalt(10)
    const hashedPassword =  await bcrypt.hash(req.body.password, salt)
+  console.log( "  the hasheeeeeeeeeed pasword is" , hashedPassword)
   const phone = req.body.phone;
   const address = req.body.address;
 //every thing is readdy here we send the data to the server  
    const newUser = new AddUser({username:username,password:hashedPassword, phone: phone, address:address });
    try{
    const saveUser= await newUser.save()
+     
       res.send({saveUser:newUser._id})
      // const token = jwt.sign({_id: newUser._id}, process.env.JWT_SECRET )
     //   console.log(token)
     //localStorage.setItem('token', token)
      //res.header('addUser-token',token).send(token);
      //res.json({ token: token})
-     console.log(token)
+     
    }catch(err){
      res.status(400).send(err)
    }
