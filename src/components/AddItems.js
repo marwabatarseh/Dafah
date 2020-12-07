@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 import { Link ,withRouter } from "react-router-dom" ;
 import Footer from './Footer';
+import { storage } from "../firebase"
 
 
  class AddItems extends Component {
@@ -13,9 +14,11 @@ import Footer from './Footer';
     this.onChangeCategory = this.onChangeCategory.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangePhoneNumber = this.onChangePhoneNumber.bind(this);
+    this.onChangeUploadImage = this.onChangeUploadImage.bind(this)
     this.onSubmit = this.onSubmit.bind(this);
     this.onChangeimg = this.onChangeimg.bind(this);
     this.onChangetype = this.onChangetype.bind(this);
+    this.handleUpload = this.handleUpload.bind(this)
 
     this.state = {
       itemName: "",
@@ -23,6 +26,7 @@ import Footer from './Footer';
       description: "",
       phoneNumber: "",
       image : "",
+      url: "",
       type:"Jacket"
     }
   }
@@ -60,6 +64,16 @@ import Footer from './Footer';
     this.setState({
       phoneNumber : e.target.value
     });
+  }
+
+  onChangeUploadImage(e) {
+    if(e.target.files[0]){
+
+    }
+  }
+
+  handleUpload(){
+
   }
 
 
@@ -176,6 +190,18 @@ import Footer from './Footer';
                     value = {this.state.phoneNumber} 
                     onChange = {this.onChangePhoneNumber}
                     placeholder = "Please insert your phone number"/>
+                </div>
+
+                <br />
+
+                <div className = "col">
+                  <label> Donor Phone Number  </label>
+                  <input 
+                    type = "file" 
+                    required="true"
+                    onChange = {this.onChangeUploadImage}
+                    placeholder = "Please insert your item image"/>
+                    <button onClick={handleUpload}>Upload</button>
                 </div>
 
                 <br />

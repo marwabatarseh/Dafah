@@ -10,7 +10,8 @@ const addItemsSchema = new Schema ({
   type: { type: String, required: true, trim: true },
   description: { type: String, required: true, trim: true },
   phoneNumber: { type: Number, required: true, trim: true },
-  image : {type:String,required: true, trim: true}
+  image : { type:String, required: true, trim: true },
+  url : { type:String, required: true, trim: true }
 }, {
   timestamps: true,
 });
