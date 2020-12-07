@@ -7,7 +7,7 @@
   - __Product Owner__: Fatima 
   - __Scrum Master__: Rahaf 
   - __Development Team Members__: Nour , Dialah , fatima , rahaf
-​
+  - __Collaborators__: Rawan , Abeer , Haneen ​, Fedaa , Marwa
 ## Table of Contents
 ​
 1. [Usage](#Usage)
