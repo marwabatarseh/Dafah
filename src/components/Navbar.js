@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+// import { token, logout } from '../verifyToken';
 
 
 export default class Navbar extends Component {
@@ -17,6 +18,9 @@ export default class Navbar extends Component {
           <li className="navbar-item">
           <Link to="/ItemsList" className="nav-link">Clothes</Link>
           </li>
+          {/* {!token() && (
+                <li className="navbar-item">
+                 <Link to="/login" className="nav-link">Login</Link> */}
           <li className="navbar-item">
           <Link to="/login" className="nav-link">Login</Link>
           </li>
