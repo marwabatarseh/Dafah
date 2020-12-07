@@ -46,7 +46,15 @@ export default class Login extends Component {
 
           console.log (response, " toooooooooooooooooooken")
           window.localStorage.setItem('token', response.data);
-          window.location = '/AddItems'
+            /// after signing the token , verify the token 
+          axios.post("http://localhost:3000/addUser/verify",  response)
+          .then(response =>{
+  
+            console.log (response, "You are authenticated")
+             window.location = '/AddItems'
+  
+          })
+          .catch(err =>alert("Incorrect token"));         
 
         })
         .catch(err =>alert("username or password is incorrect"));         

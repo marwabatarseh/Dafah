@@ -72,10 +72,32 @@ router.route('/').get((req, res) => {
     
       const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET );
       console.log("toooooooooooooooooooooooken ..........", token)
-     res.header('addUser-token',token).send(token);
-    
+    // res.header('addUser-token',token).send(token);
+           res.send(token);
        });
+
   
+/// verify the token for authorization 
+       router.route('/verify').post(async (req, res) => {
+        console.log (req.body.data, "veryyyyyyyyyyyyyyyyyyyyy")
+        const token = req.body.data;
+        
+    if (token){
+    jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken)=> {
+        if(err){
+            console.log("errrrrrrrrrrrror no token")
+        res.redirect('/login');
+        } else {
+        console.log(decodedToken)
+          res.send('you are authenticated');
+        }
+       
+    })
+    }
+    else{
+        res.redirect('/login');
+    }
+  });
     
 
     module.exports= router;
