@@ -73,9 +73,9 @@ export default class Signup extends Component {
            
             axios.post("http://localhost:3000/addUser/adduser", user)
             .then(res => {
-             console.log(user , "uuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
+            // console.log(user , "uuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
 
-            //window.location = '/login'
+              window.location = '/login'
 
             })  
              

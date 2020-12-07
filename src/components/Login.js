@@ -43,12 +43,13 @@ export default class Login extends Component {
         
         axios.post("http://localhost:3000/addUser/login", user)
         .then(response =>{
-       console.log (response)
-       window.localStorage.setItem('token', response.data);
 
-        window.location = '/AddItems'
+          console.log (response, " toooooooooooooooooooken")
+          window.localStorage.setItem('token', response.data);
+          window.location = '/AddItems'
+
         })
-        .catch(err =>alert("username or password is incorrect") );         
+        .catch(err =>alert("username or password is incorrect"));         
     }
 
 

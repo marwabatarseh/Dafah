@@ -48,8 +48,6 @@ router.route('/').get((req, res) => {
    }catch(err){
      res.status(400).send(err)
    }
-  
- 
     });
 
     ///loggingggg innnn
@@ -59,9 +57,10 @@ router.route('/').get((req, res) => {
 
       const user = await AddUser.findOne({username: req.body.username})
       if (!user) {
+        console.log("no username ..........")
         res.status(404).json({ errors });
-  // stop further execution in this callback
-  return;
+          // stop further execution in this callback
+          return;
       };
 
     //checking if password is correct
@@ -72,8 +71,9 @@ router.route('/').get((req, res) => {
     //creat and send a token
     
       const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET );
+      console.log("toooooooooooooooooooooooken ..........", token)
      res.header('addUser-token',token).send(token);
-     //console.log(res.header)
+    
        });
   
     
