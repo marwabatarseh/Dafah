@@ -31,23 +31,23 @@ const FooterPage = () => {
           <MDBCol md="3" className="text-center" style = {{lineHeight: "1.6"}}>
             <h6 className="title">Contributors</h6> <br />
             <div>
-            <a href="https://www.un.org/en/" target="_blank" style = {{fontSize: "12px", letterSpacing: "1.5px"}}>
+            <a href="https://www.un.org/en/" rel="noreferrer" target="_blank" style = {{fontSize: "12px", letterSpacing: "1.5px"}}>
             <img src = "https://upload.wikimedia.org/wikipedia/commons/2/2f/Flag_of_the_United_Nations.svg" 
             alt = "United Nations"
             width="55" height="50"
             className = "rounded-circle" /> 
             </a>
             <br />
-            <a href="https://www.un.org/en/" target="_blank" style = {{fontSize: "12px", letterSpacing: "1.5px"}}>United Nations</a>
+            <a href="https://www.un.org/en/" rel="noreferrer" target="_blank" style = {{fontSize: "12px", letterSpacing: "1.5px"}}>United Nations</a>
             <br /> <br />
-            <a href="https://www.unicef.org/" target="_blank" style = {{fontSize: "12px", letterSpacing: "1.5px"}}>
+            <a href="https://www.unicef.org/" rel="noreferrer" target="_blank" style = {{fontSize: "12px", letterSpacing: "1.5px"}}>
             <img src = "https://1000logos.net/wp-content/uploads/2017/06/emblem-UNICEF-500x386.jpg" 
             alt = "UNICEF"
             width="55" height="50"
             className = "rounded-circle"/> 
             </a>
             <br/>
-            <a href="https://www.unicef.org/" target="_blank" style = {{fontSize: "12px", letterSpacing: "1.5px"}}>UNHCR</a>
+            <a href="https://www.unicef.org/" rel="noreferrer" target="_blank" style = {{fontSize: "12px", letterSpacing: "1.5px"}}>UNHCR</a>
             </div>
           </MDBCol>
         </MDBRow>
