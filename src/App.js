@@ -29,7 +29,7 @@ function App() {
         <Route path = "/addUser"  component = { Signup } />
         <Route path = "/login" component = { Login } />
         <Route path = "/edit/:id" component = { EditItems }/>
-        <Route path = "/logout" component = { Login } />
+        {/* <Route path = "/logout" component = { Login } /> */}
     
       </div>
     </Router>

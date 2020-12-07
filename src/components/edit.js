@@ -11,6 +11,7 @@ export default class EditItems extends Component {
     this.onChangeItemName = this.onChangeItemName.bind(this);
     this.onChangeCategory = this.onChangeCategory.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangePhoneNumber = this.onChangePhoneNumber.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onChangeimg = this.onChangeimg.bind(this);
     this.onChangetype = this.onChangetype.bind(this);
@@ -19,6 +20,7 @@ export default class EditItems extends Component {
       itemName: "",
       category : "Women",
       description: "",
+      phoneNumber: "",
       image : "",
       type:"Jacket",
     
@@ -35,6 +37,7 @@ export default class EditItems extends Component {
           itemName: response.data.itemName,
           category: response.data.category,
           description: response.data.description,
+          phoneNumber: response.data.phoneNumber,
           image: response.data.image,
           type: response.data.type,
         })  
@@ -71,6 +74,14 @@ export default class EditItems extends Component {
       description: e.target.value
     });
   }
+
+  onChangePhoneNumber(e) {
+    this.setState({
+      phoneNumber: e.target.value
+    });
+  }
+
+
   onChangeimg(e) {
     this.setState({
       image : e.target.value
@@ -83,6 +94,7 @@ export default class EditItems extends Component {
       itemName: this.state.itemName,
       category: this.state.category,
       description: this.state.description,
+      phoneNumber: this.state.phoneNumber,
       type:this.state.type,
       image:this.state.image
     }
@@ -166,6 +178,20 @@ export default class EditItems extends Component {
                 </div>
 
                 <br />
+
+                <div className = "col">
+                  <label>Donor Phone Number  </label>
+                  <input 
+                    type = "text" 
+                    className = "form-control" 
+                    value = {this.state.phoneNumber} 
+                    onChange = {this.onChangePhoneNumber}
+                    placeholder = "Please insert your phone number"/>
+                </div>
+
+                <br />
+
+                
                 
          <div >
          <div className = "addimg">

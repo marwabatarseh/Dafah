@@ -10,6 +10,7 @@ const ClothesItem = props => (
         <td>{props.item.category}</td>
         <td>{props.item.type}</td>
         <td>{props.item.description}</td>
+        <td>{props.item.phoneNumber}</td>
         
         <td>
         <img src= {props.item.image} width="200" height="200" class="w3-round" alt="Norway"/>
@@ -91,6 +92,7 @@ class ItemsList extends Component {
                         <th>Category</th>
                         <th>Type</th>
                         <th>Description</th>
+                        <th>Donor Phone Number</th>
                         <th>Image</th>
                         
                     </tr>
