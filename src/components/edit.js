@@ -27,7 +27,7 @@ export default class EditItems extends Component {
 
 
   componentDidMount() {
-    axios.get('http://localhost:3000/addItems/'+this.props.match.params.id)
+    axios.get('https://safe-earth-24175.herokuapp/addItems/'+this.props.match.params.id)
 
     
       .then(response => {
@@ -89,7 +89,7 @@ export default class EditItems extends Component {
 
     console.log(item);
 
-    axios.post("http://localhost:3000/addItems/update/"+this.props.match.params.id, item)
+    axios.post("https://safe-earth-24175.herokuapp/addItems/update/"+this.props.match.params.id, item)
       .then(res => console.log(res.data));
 
     window.location = '/ItemsList'

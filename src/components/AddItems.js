@@ -70,7 +70,7 @@ import Footer from './Footer';
 
     console.log(item);
 
-    axios.post("http://localhost:3000/addItems/add", item)
+    axios.post("https://safe-earth-24175.herokuapp/addItems/add", item)
       .then(res => console.log(res.data));
 
     window.location = '/ItemsList'
