@@ -58,7 +58,11 @@ router.route('/').get((req, res) => {
     //checking if the username is signed up 
 
       const user = await AddUser.findOne({username: req.body.username})
-      if (!user) {return res.status(400).send("there is no account with this username,please check your username?")};
+      if (!user) {
+        res.status(404).json({ errors });
+  // stop further execution in this callback
+  return;
+      };
 
     //checking if password is correct
 
