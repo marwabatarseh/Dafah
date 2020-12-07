@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link ,withRouter } from "react-router-dom" ;
 import axios from "axios";
 import Footer from './Footer';
-import Search from './Search.js';
+// import Search from './Search.js';
 
 
 //
@@ -44,13 +44,14 @@ class ItemsList extends Component {
         }
     }
 
+   
     componentDidMount() {
          axios.get("http://localhost:3000/addItems/")   
             .then( res => {
                 this.setState({items: res.data})
             })
             .catch((error) => {
-                console.log(error);
+            // console.log(error);
             })
     }
 
@@ -71,22 +72,39 @@ class ItemsList extends Component {
             return <ClothesItem item = { currentItem } deleteItem = { this.deleteItem } key = { currentItem._id }/>; 
         })
     } 
-    // onChangecategoryHandler(event) {
-    //     this.setState(
-    //       {
-    //         category: event.target.value,
-    //       }
-    //     );
-    //   }
-    onSearch = e => {
-        let { items } = this.state
-        let string = e.target.value
-        if(string.length > 0){
-           let filteredItems = items.filter(item => item.category.includes(string))
-           this.setState({category:string,filteredItems:filteredItems})
-        }
-        else this.setState({category:string,filteredItems:[]})
+
+    onSubmit(category){
+        console.log(category,"cccccccccccccccccccccccccccc")
+        axios.post("http://localhost:3000/addItems/select")
+        .then(res =>{
+         console.log (res, "Items selected")
+        })
+        .catch(err =>alert("no items found"));         
     }
+    
+    onChangecategoryHandler(event) {
+        this.setState(
+          {
+            category: event.target.value,
+          },
+          ()=>{
+              this.onSubmit(this.state.category)
+          }
+        );
+        console.log(this.state.category)
+
+      }
+
+    // onSearch = e => {
+    //     let { items } = this.state
+    //     let string = e.target.value
+    //     if(string.length > 0){
+    //        let filteredItems = items.filter(item => item.category.includes(string))
+    //        this.setState({category:string,filteredItems:filteredItems})
+    //     }
+    //     else this.setState({category:string,filteredItems:[]})
+    // }
+
 // onFilter(e){
 //     var category = e.target.value
 //     if(category.length > 0){
@@ -101,16 +119,16 @@ class ItemsList extends Component {
 
         return (
             <div>
-                  {/* <Search/> */}
+                 
             <br />
             <div className = "container text-center border border-light p-9">
                 <h2>Clothing</h2>
-                <select name="category" id="category"
+    <select name="category" id="category"
      native
     value={this.state.category}
-    onChange={e => this.onSearch(e)}
+    onChange={this.onSubmit.bind(this)}
     >
-    <option value="">Please choose by Category</option>
+    <option value="Please choose by Category">Please choose by Category</option>
     <option value="women">Women</option>
     <option value="men">Men</option>
     <option value="kids">Kids</option>
