@@ -10,14 +10,12 @@ export default class Search extends Component {
 
 
 
-
-    onChangecategoryHandler(e) {
-        this.setState(
-          {
-            category : e.target.value,
-          }
-        );
-      }
+onchangeCategory (e){
+    this.setState({
+        category:e.target.value
+    });
+}
+    
 
 
 
@@ -30,7 +28,7 @@ export default class Search extends Component {
     <select name="category" id="category"
      native
     value={this.state.value}
-    onChange={this.onChangecategoryHandler.bind(this)}>
+    onChange={this.onchangeCategory.bind(this)}>
     <option value="">Please choose by Category</option>
     <option value="women">Women</option>
     <option value="men">Men</option>

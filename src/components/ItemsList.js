@@ -39,6 +39,7 @@ class ItemsList extends Component {
             items: [],
             filteredItems :[],
             SearchString:'',
+            category:""
         }
     }
 
@@ -58,6 +59,12 @@ class ItemsList extends Component {
         this.setState({
             items: this.state.items.filter(el => el._id !== id)
         })
+    }
+
+    onchangeCategory (e){
+        this.setState({
+            category:e.target.value
+        });
     }
 
     itemsList() {
