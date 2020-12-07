@@ -3,14 +3,10 @@ const AddUser = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const jwt =require('jsonwebtoken');
 
-
-
-
 router.route('/').get((req, res) => {
       AddUser.find()
     .then(users => res.json(users))
     .catch(err => res.status(400).json('Error: ' + err));
-  
   });
 
   router.route('/adduser').post(async (req, res) => {
@@ -36,13 +32,8 @@ router.route('/').get((req, res) => {
    const newUser = new AddUser({username:username,password:hashedPassword, phone: phone, address:address });
    try{
    const saveUser= await newUser.save()
-      res.send({saveUser:newUser._id})
-     // const token = jwt.sign({_id: newUser._id}, process.env.JWT_SECRET )
-    //   console.log(token)
-    //localStorage.setItem('token', token)
-     //res.header('addUser-token',token).send(token);
-     //res.json({ token: token})
-     console.log(token)
+    res.send({saveUser:newUser._id})
+    console.log(token)
    }catch(err){
      res.status(400).send(err)
    }
@@ -54,7 +45,6 @@ router.route('/').get((req, res) => {
     router.route('/login').post(async (req, res) => {
 
     //checking if the username is signed up 
-
       const user = await AddUser.findOne({username: req.body.username})
       if (!user) {
         res.status(404).json({ errors });
@@ -63,17 +53,13 @@ router.route('/').get((req, res) => {
       };
 
     //checking if password is correct
-
       const validpassword = await bcrypt.compare(req.body.password, user.password)
       if (!validpassword) return res.status(400).send('Password not correct');
 
     //creat and send a token
-    
       const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET );
      res.header('addUser-token',token).send(token);
      //console.log(res.header)
        });
   
-    
-
     module.exports= router;

@@ -2,17 +2,28 @@ import React, { Component } from "react";
 import axios from "axios";
 import Footer from "./Footer";
 
+
+const initialState = {
+  username: "",
+  password: "",
+  phone: "",
+  address: "",
+  usernameError: "",
+  passwordError: "",
+  phoneError: "",
+  addressError: ""
+}
 //creat a class for the sign up component
 export default class Signup extends Component {
   constructor(props) {
     super(props);
+    var state = initialState;
 
     //bind functions, you can use this.function without the need to bind it everytime
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onChangePhone = this.onChangePhone.bind(this);
     this.onChangeAddress = this.onChangeAddress.bind(this);
-
     this.onSubmit = this.onSubmit.bind(this);
     //the keys are the same as the Schema .. see the modle userSchema in user.model.js line 6 or so.
     //this will work as blue prent to our state
@@ -21,8 +32,13 @@ export default class Signup extends Component {
       password: "",
       phone: "",
       address: "",
+      usernameError: "",
+      passwordError: "",
+      phoneError: "",
+      addressError: ""
     };
   }
+
   //onChance function to track the changes and help to set (change) the state .
   onChangeUsername(e) {
     this.setState({
@@ -44,9 +60,27 @@ export default class Signup extends Component {
       address: e.target.value,
     });
   }
+
+  validate = () => {
+    var usernameError= "";
+    var passwordError= "";
+    var phoneError= "";
+    var addressError= "";
+
+    if (this.state.name < 8) {
+      usernameError = "username cannot be less than 8 characters!"
+    }
+  }
+
   onSubmit(e) {
     e.preventDefault();
     //where we set the state and send it in the post request
+    const isValid = this.validate();
+    if (isValid) {
+      console.log(this.state)
+      //clear form
+      this.setState(initialState)
+    }
     const user = {
       username: this.state.username,
       password: this.state.password,
@@ -69,12 +103,9 @@ export default class Signup extends Component {
       .post("http://localhost:3000/addUser/adduser", user)
       .then((res) => {
         // console.log(user);
-
         window.location = "/login";
       })
-
       .catch((err) => alert("user name or phone number is used"));
-
     //console.log('user added')
   }
 
@@ -101,11 +132,14 @@ export default class Signup extends Component {
                 onChange={this.onChangeUsername}
                 placeholder="User Name"
               />
+              <div style={{ color: "red" }}>
+                {this.state.usernameError}
+              </div>
               <br></br>
             </div>
 
             <div className="col">
-              <label> Creat Password </label>
+              <label> Create Password </label>
               <br></br>
               <input
                 required="true"
@@ -116,6 +150,9 @@ export default class Signup extends Component {
                 onChange={this.onChangePassword}
                 placeholder="Creat Password"
               />
+              <div style={{ color: "red" }}>
+                {this.state.passwordError}
+              </div>
               <br></br>
             </div>
 
@@ -129,6 +166,9 @@ export default class Signup extends Component {
                 onChange={this.onChangePhone}
                 placeholder="Phone Number"
               />
+              <div style={{ color: "red" }}>
+                {this.state.phoneError}
+              </div>
               <br></br>
             </div>
 
@@ -143,6 +183,9 @@ export default class Signup extends Component {
                 onChange={this.onChangeAddress}
                 placeholder="Address"
               />
+              <div style={{ color: "red" }}>
+                {this.state.addressError}
+              </div>
               <br></br>
             </div>
 
