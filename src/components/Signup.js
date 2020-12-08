@@ -86,7 +86,8 @@ export default class Signup extends Component {
         <div className="container text-center">
           <form
             className="text-center border border-light p-9"
-            onSubmit={this.onSubmit}>
+            onSubmit={this.onSubmit}
+          >
             <h3 className="mb-3">Sign Up</h3>
             <br />
             <div className="col">

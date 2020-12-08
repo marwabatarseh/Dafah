@@ -5,11 +5,13 @@ const FooterPage = () => {
   return (
     <MDBFooter
       color="grey darken-4"
-      className="font-small pt-4 mt-4 w-auto p-3">
+      className="font-small pt-4 mt-4 w-auto p-3"
+    >
       <MDBContainer
         fluid
         className="text-center text-md-left"
-        style={{ padding: "16px", fontFamily: "Century Gothic" }}>
+        style={{ padding: "16px", fontFamily: "Century Gothic" }}
+      >
         <MDBRow className="d-flex justify-content-around">
           <MDBCol md="3" className="text-center">
             <h6 className="title">About Us</h6> <br />
@@ -18,7 +20,8 @@ const FooterPage = () => {
                 fontSize: "12px",
                 letterSpacing: "1.5px",
                 lineHeight: "1.5",
-              }}>
+              }}
+            >
               DAFAH. A charity organization aimed towards creating a direct
               connection between the donor and the organization whereas anyone
               can open the website, create an account and simply submit a form
@@ -33,7 +36,8 @@ const FooterPage = () => {
                 fontSize: "12px",
                 letterSpacing: "1.5px",
                 lineHeight: "1.5",
-              }}>
+              }}
+            >
               ADDRESS <br />
               Al- Sha'ab St. 29, Al-Jandaweel, Amman, Jordan <br />
               PHONE # <br />
@@ -56,7 +60,8 @@ const FooterPage = () => {
                 href="https://www.un.org/en/"
                 rel="noreferrer"
                 target="_blank"
-                style={{ fontSize: "12px", letterSpacing: "1.5px" }}>
+                style={{ fontSize: "12px", letterSpacing: "1.5px" }}
+              >
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Flag_of_the_United_Nations.svg"
                   alt="United Nations"
@@ -70,7 +75,8 @@ const FooterPage = () => {
                 href="https://www.un.org/en/"
                 rel="noreferrer"
                 target="_blank"
-                style={{ fontSize: "12px", letterSpacing: "1.5px" }}>
+                style={{ fontSize: "12px", letterSpacing: "1.5px" }}
+              >
                 United Nations
               </a>
               <br /> <br />
@@ -78,7 +84,8 @@ const FooterPage = () => {
                 href="https://www.unicef.org/"
                 rel="noreferrer"
                 target="_blank"
-                style={{ fontSize: "12px", letterSpacing: "1.5px" }}>
+                style={{ fontSize: "12px", letterSpacing: "1.5px" }}
+              >
                 <img
                   src="https://1000logos.net/wp-content/uploads/2017/06/emblem-UNICEF-500x386.jpg"
                   alt="UNICEF"
@@ -92,7 +99,8 @@ const FooterPage = () => {
                 href="https://www.unicef.org/"
                 rel="noreferrer"
                 target="_blank"
-                style={{ fontSize: "12px", letterSpacing: "1.5px" }}>
+                style={{ fontSize: "12px", letterSpacing: "1.5px" }}
+              >
                 UNHCR
               </a>
             </div>
