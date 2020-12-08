@@ -7,7 +7,8 @@ export default class Navbar extends Component {
       <div>
         <nav
           style={{ color: "red" }}
-          className="navbar navbar-dark bg-dark navbar-expand-lg">
+          className="navbar navbar-dark bg-dark navbar-expand-lg"
+        >
           <Link to="/Homepage" className="navbar-brand">
             DAFAH
           </Link>
