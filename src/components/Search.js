@@ -26,6 +26,8 @@ const Searchdruop = (props) => {
         placeholder="Search"
         ref={inputRef}
         onChange={onChange}
+        // onChange={onChangeHandler}
+        
       />
       <ul id="results" className="list-group" ref={ulRef}>
         {options.map((option, index) => {
