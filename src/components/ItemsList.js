@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link ,withRouter } from "react-router-dom" ;
 import axios from "axios";
 import Footer from './Footer';
-
+import Search from './Search'
 //
 const ClothesItem = props => (
     <tr>
@@ -84,7 +84,8 @@ class ItemsList extends Component {
             <br />
             <div className = "container text-center border border-light p-9">
                 <h2>Clothing</h2>
-                <input name="search" className="form-control" onChange={e => this.onSearch(e)} value={this.state.SearchString}  placeholder="Search for item Name"/>
+                <Search/>
+                <input name="Category" className="form-control" onChange={e => this.onSearch(e)} value={this.state.SearchString}  placeholder="Search for item Name"/>
                 <table className = "table">
                 <thead className = "thead">
                     <tr>
