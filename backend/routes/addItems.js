@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const AddItems = require('../models/addItems.model');
-const verfiy = require('./verifyToken')
-const { requireAuth } = require('./verifyToken')
+
+
 //AddItems is the schema
 //CRUD Operations:
 // 
@@ -18,6 +18,7 @@ router.route('/add').post((req, res) => {
   const itemName = req.body.itemName;
   const category = req.body.category;
   const description = req.body.description;
+  const phoneNumber = req.body.phoneNumber;
   const image=req.body.image;
   const type = req.body.type;
 
@@ -25,6 +26,7 @@ router.route('/add').post((req, res) => {
     itemName,
     category,
     description,
+    phoneNumber,
     image,
     type
   });
@@ -48,6 +50,13 @@ router.route("/:id").delete((req, res) => {
   .catch(err => res.status(400).json("Error: " + err));
 });
 
+// router.route("/select").post((req, res) => {
+//   // AddItems.find()
+//   console.log(req.body, "IIIIIIIIIIIIIIIIIIIIIIII")
+//   AddItems.find(req.body.category)
+//   .then(() => res.json('Item is deleted!'))
+//   .catch(err => res.status(400).json("Error: " + err));
+// });
 //UPDATE item by ID
 router.route("/update/:id", ).post((req, res) => {
   AddItems.findById(req.params.id)
@@ -55,6 +64,7 @@ router.route("/update/:id", ).post((req, res) => {
     items.itemName = req.body.itemName;
     items.category = req.body.category;
     items.description = req.body.description;
+    items.phoneNumber = req.body.phoneNumber;
     items.type = req.body.type;
     items.image = req.body.image;
     items.save()

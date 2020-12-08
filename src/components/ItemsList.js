@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import { Link ,withRouter } from "react-router-dom" ;
 import axios from "axios";
 import Footer from './Footer';
-
+import Search from './Search'
 //
 const ClothesItem = props => (
     <tr>
+
         <td>{props.item.itemName}</td>
         <td>{props.item.category}</td>
         <td>{props.item.type}</td>
         <td>{props.item.description}</td>
+        <td>{props.item.phoneNumber}</td>
         
         <td>
         <img src= {props.item.image} width="200" height="200" class="w3-round" alt="Norway"/>
@@ -35,17 +37,19 @@ class ItemsList extends Component {
         this.state = {
             items: [],
             filteredItems :[],
-            SearchString:'',
+            // SearchString:''
+            category:""
         }
     }
 
+   
     componentDidMount() {
          axios.get("http://localhost:3000/addItems/")   
             .then( res => {
                 this.setState({items: res.data})
             })
             .catch((error) => {
-                console.log(error);
+            // console.log(error);
             })
     }
 
@@ -57,6 +61,8 @@ class ItemsList extends Component {
         })
     }
 
+   
+
     itemsList() {
         let listedItems = (this.state.filteredItems.length > 0)? this.state.filteredItems : this.state.items; 
 
@@ -65,25 +71,58 @@ class ItemsList extends Component {
         })
     } 
 
-    onSearch = e => {
-        let { items } = this.state
-        let string = e.target.value
-        if(string.length > 0){
-           let filteredItems = items.filter(item => item.itemName.includes(string))
-           this.setState({SearchString:string,filteredItems:filteredItems})
-        }
-        else this.setState({SearchString:string,filteredItems:[]})
+    onSubmit(category){
+        console.log(category,"cccccccccccccccccccccccccccc")
+        axios.post("http://localhost:3000/addItems/select")
+        .then(res =>{
+         console.log (res, "Items selected")
+        })
+        .catch(err =>alert("no items found"));         
     }
+    
+    onChangecategoryHandler(event) {
+        this.setState(
+          {
+            category: event.target.value,
+          },
+          ()=>{
+              this.onSubmit(this.state.category)
+          }
+        );
+        console.log(this.state.category)
 
+      }
+
+    // onSearch = e => {
+    //     let { items } = this.state
+    //     let string = e.target.value
+    //     if(string.length > 0){
+    //        let filteredItems = items.filter(item => item.category.includes(string))
+    //        this.setState({category:string,filteredItems:filteredItems})
+    //     }
+    //     else this.setState({category:string,filteredItems:[]})
+    // }
+
+// onFilter(e){
+//     var category = e.target.value
+//     if(category.length > 0){
+//          let filteredItems = items.filter(item => item.itemName.includes(category))
+//          this.setState({category:category,filteredItems:filteredItems})
+//      }
+//     else this.setState({category:category,filteredItems:[]})
+
+// }
 
     render() {
 
         return (
             <div>
+                 
             <br />
             <div className = "container text-center border border-light p-9">
                 <h2>Clothing</h2>
-                <input name="search" className="form-control" onChange={e => this.onSearch(e)} value={this.state.SearchString}  placeholder="Search for item Name"/>
+                <Search/>
+                <input name="Category" className="form-control" onChange={e => this.onSearch(e)} value={this.state.SearchString}  placeholder="Search for item Name"/>
                 <table className = "table">
                 <thead className = "thead">
                     <tr>
@@ -91,6 +130,7 @@ class ItemsList extends Component {
                         <th>Category</th>
                         <th>Type</th>
                         <th>Description</th>
+                        <th>Donor Phone Number</th>
                         <th>Image</th>
                         
                     </tr>
@@ -100,6 +140,7 @@ class ItemsList extends Component {
                 </tbody>
                 </table>
             </div>
+          
             <Footer />
             </div>
         )
