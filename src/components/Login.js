@@ -6,8 +6,9 @@ import Footer from './Footer';
 
 
 export default class Login extends Component {
+  
     constructor(props) {
-        super(props);  
+        super(props)  
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
 
@@ -42,12 +43,21 @@ export default class Login extends Component {
         
         axios.post("http://localhost:3000/addUser/login", user)
         .then(response =>{
-      // console.log (response)
-       window.localStorage.setItem('token', response.data);
 
-        window.location = '/AddItems'
+          console.log (response, " toooooooooooooooooooken")
+          window.localStorage.setItem('token', response.data);
+            /// after signing the token , verify the token 
+          axios.post("http://localhost:3000/addUser/verify",  response)
+          .then(response =>{
+  
+            console.log (response, "You are authenticated")
+             window.location = '/AddItems'
+  
+          })
+          .catch(err =>alert("Incorrect token"));         
+
         })
-        .catch(err =>alert("username or password is incorrect") );         
+        .catch(err =>alert("username or password is incorrect"));         
     }
 
 

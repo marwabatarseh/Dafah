@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const AddItems = require('../models/addItems.model');
-const verfiy = require('./verifyToken')
-const { requireAuth } = require('./verifyToken')
+
+
 //AddItems is the schema
 //CRUD Operations:
 // 
@@ -19,8 +19,8 @@ router.route('/add').post((req, res) => {
   const category = req.body.category;
   const description = req.body.description;
   const phoneNumber = req.body.phoneNumber;
-  const image = req.body.image;
-  const url = req.body.url;
+  const image = req.body.url;
+  // const url = req.body.url;
   const type = req.body.type;
 
   const newItem = new AddItems ({
@@ -29,7 +29,7 @@ router.route('/add').post((req, res) => {
     description,
     phoneNumber,
     image,
-    url,
+    // url,
     type
   });
   
@@ -61,8 +61,8 @@ router.route("/update/:id", ).post((req, res) => {
     items.description = req.body.description;
     items.phoneNumber = req.body.phoneNumber;
     items.type = req.body.type;
-    items.image = req.body.image;
-    items.url = req.body.url;
+    items.image = req.body.url;
+    // items.url = req.body.url;
     items.save()
     .then(() => res.json("Item is updated!"))
     .catch(err => res.status(400).json('Error: ' + err));

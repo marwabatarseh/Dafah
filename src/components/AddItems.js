@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import { Link ,withRouter } from "react-router-dom" ;
+import {withRouter } from "react-router-dom" ;
 import Footer from './Footer';
-import { storage } from "../firebase"
+import { storage } from "../firebase.js"
 
 
  class AddItems extends Component {
@@ -14,18 +14,18 @@ import { storage } from "../firebase"
     this.onChangeCategory = this.onChangeCategory.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangePhoneNumber = this.onChangePhoneNumber.bind(this);
-    this.onChangeUploadImage = this.onChangeUploadImage.bind(this)
     this.onSubmit = this.onSubmit.bind(this);
     this.onChangeimg = this.onChangeimg.bind(this);
     this.onChangetype = this.onChangetype.bind(this);
     this.handleUpload = this.handleUpload.bind(this)
+
 
     this.state = {
       itemName: "",
       category : "Women",
       description: "",
       phoneNumber: "",
-      image : "",
+      image : null,
       url: "",
       type:"Jacket"
     }
@@ -66,25 +66,53 @@ import { storage } from "../firebase"
     });
   }
 
-  onChangeUploadImage(e) {
-    if(e.target.files[0]){
-
-    }
-  }
-
-  handleUpload(){
-
-  }
-
 
 
   onChangeimg(e) {
-    this.setState({
-      image : e.target.value
-    });
+    if(e.target.files[0]){
+      this.setState({
+          image : e.target.files[0]
+         
+        });
+         console.log(e.target.files,"wewewewewee")
+    }else console.log("error in onchangeimg")
+
+  
   }
 
+  handleUpload() {
+    // e.preventDefault();
+    const uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {},
+      error => {
+        console.log(error, "error");
+      },
+      () => {
+        storage
+        .ref("images")
+        .child(this.state.image.name)
+        .getDownloadURL()
+        .then(url => {
+          this.setState({
+            url: url
+            
+          })
+          // console.log(this.state.url,"im the url")
+        });
+
+      }
+    )
+
+  }
+
+
+
+
   onSubmit(e) {
+    // console.log(this.state.url, "imm in submettt")
+    
     e.preventDefault();
     const item = {
       itemName: this.state.itemName,
@@ -92,10 +120,10 @@ import { storage } from "../firebase"
       description: this.state.description,
       phoneNumber: this.state.phoneNumber,
       type:this.state.type,
-      image:this.state.image
+      image:this.state.url
     }
 
-    console.log(item);
+    // console.log(item.image, "heeeeeee");
 
     axios.post("http://localhost:3000/addItems/add", item)
       .then(res => console.log(res.data));
@@ -104,6 +132,7 @@ import { storage } from "../firebase"
   }
 
   render() {
+    console.log("image", this.state.image)
     return (
       <div>
         <br />
@@ -193,27 +222,19 @@ import { storage } from "../firebase"
                 </div>
 
                 <br />
-
-                <div className = "col">
-                  <label> Donor Phone Number  </label>
-                  <input 
-                    type = "file" 
-                    required="true"
-                    onChange = {this.onChangeUploadImage}
-                    placeholder = "Please insert your item image"/>
-                    <button onClick={handleUpload}>Upload</button>
-                </div>
-
-                <br />
                 
                 <div className = "col">
                     <label>Add Image as URL</label>
                     <input 
-                      type = "text" 
-                      required="true"
-                      className = "form-control" 
-                      value = {this.state.image} 
+                      type = "file" 
+                      // required="true"
+                      // className = "form-control" 
+                      // value = {this.state.image} 
                       onChange = {this.onChangeimg}/>
+                      <button onClick = {this.handleUpload}>Upload</button>
+                      <br />
+     
+                      <img src = {this.state.url || "http://via.placeholder.com/100x150"} alt = "firebase-image" />
                   </div>  
 
                   <br />
