@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import CardDeck from "react-bootstrap/CardDeck";
-
 export default class Cards extends Component {
   render() {
     return (

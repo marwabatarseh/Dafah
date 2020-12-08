@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Slideshow from "./Carousel";
 import Cards from "./Cards";
 import { MDBContainer, MDBFooter } from "mdbreact";
-
 export default class Homepage extends Component {
   render() {
     return (
