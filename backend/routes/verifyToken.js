@@ -11,7 +11,6 @@ jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken)=> {
     console.log(decodedToken)
         next();
     }
-   
 })
 }
 else{

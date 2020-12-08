@@ -44,6 +44,7 @@ class ItemsList extends Component {
          axios.get("http://localhost:3000/addItems/")   
             .then( res => {
                 this.setState({items: res.data})
+                console.log(this.state.items,"hayniiii")
             })
             .catch((error) => {
                 console.log(error);
