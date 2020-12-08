@@ -11,16 +11,14 @@ export default class EditItems extends Component {
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangePhoneNumber = this.onChangePhoneNumber.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.onChangeimg = this.onChangeimg.bind(this);
     this.onChangetype = this.onChangetype.bind(this);
 
     this.state = {
       itemName: "",
-      category: "Women",
+      category: "",
       description: "",
       phoneNumber: "",
-      image: "",
-      type: "Jacket",
+      type: "",
     };
   }
 
@@ -33,7 +31,6 @@ export default class EditItems extends Component {
           category: response.data.category,
           description: response.data.description,
           phoneNumber: response.data.phoneNumber,
-          image: response.data.url,
           type: response.data.type,
         });
       })
@@ -71,11 +68,6 @@ export default class EditItems extends Component {
       phoneNumber: e.target.value,
     });
   }
-  onChangeimg(e) {
-    this.setState({
-      image: e.target.value,
-    });
-  }
 
   onSubmit(e) {
     e.preventDefault();
@@ -85,7 +77,6 @@ export default class EditItems extends Component {
       description: this.state.description,
       phoneNumber: this.state.phoneNumber,
       type: this.state.type,
-      image: this.state.image,
     };
     console.log(item);
 
@@ -189,20 +180,8 @@ export default class EditItems extends Component {
           <br />
 
           <div>
-            <div className="addimg">
-              <label>Add Image URL</label>
-              <input
-                type="text"
-                className="form-control"
-                value={this.state.image}
-                onChange={this.onChangeimg}
-              />
-            </div>
-          </div>
-
-          <div>
             <button type="submit" value="Submit" className="btn btn-dark">
-              Edit
+              Save
             </button>
           </div>
         </form>
