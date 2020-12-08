@@ -74,7 +74,6 @@ import { storage } from "../firebase.js"
           image : e.target.files[0]
          
         });
-         console.log(e.target.files,"wewewewewee")
     }else console.log("error in onchangeimg")
 
   
@@ -99,7 +98,7 @@ import { storage } from "../firebase.js"
             url: url
             
           })
-          // console.log(this.state.url,"im the url")
+
         });
 
       }
@@ -109,10 +108,7 @@ import { storage } from "../firebase.js"
 
 
 
-
   onSubmit(e) {
-    // console.log(this.state.url, "imm in submettt")
-    
     e.preventDefault();
     const item = {
       itemName: this.state.itemName,
@@ -123,13 +119,14 @@ import { storage } from "../firebase.js"
       image:this.state.url
     }
 
-    // console.log(item.image, "heeeeeee");
+    console.log(item);
 
     axios.post("http://localhost:3000/addItems/add", item)
-      .then(res => console.log(res.data));
+      .then(res => console.log(res.data, "nooooooo"));
 
     window.location = '/ItemsList'
   }
+
 
   render() {
     console.log("image", this.state.image)
@@ -138,7 +135,7 @@ import { storage } from "../firebase.js"
         <br />
         <div className = "container">
        
-          <form className="text-center border border-light p-9" action="#!" onSubmit = {this.onSubmit} >
+          <form className="text-center border border-light p-9" action="#!" onSubmit = {this.onSubmit}>
 
             <h3> "Only by giving are you able to receive more than you already have." -Jim Rohn </h3>
 
@@ -227,8 +224,8 @@ import { storage } from "../firebase.js"
                     <label>Add Image as URL</label>
                     <input 
                       type = "file" 
-                      // required="true"
-                      // className = "form-control" 
+                      required="true"
+                      className = "form-control" 
                       // value = {this.state.image} 
                       onChange = {this.onChangeimg}/>
                       <button onClick = {this.handleUpload}>Upload</button>
@@ -240,7 +237,7 @@ import { storage } from "../firebase.js"
                   <br />
 
                 <div>
-                <button type="submit" value = "Submit" className="btn btn-deep-orange darken-4">Submit</button>
+                <button type="submit" className="btn btn-deep-orange darken-4" >Submit</button>
                 </div>
 
           </form>

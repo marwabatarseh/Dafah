@@ -14,14 +14,37 @@ router.route('/').get( (req, res) => {
 });
 
 //POST(CREATE) new item
+// router.route('/add').post((req, res) => {
+//   const itemName = req.body.itemName;
+//   const category = req.body.category;
+//   const description = req.body.description;
+//   const phoneNumber = req.body.phoneNumber;
+//   const image = req.body.image;
+//   const type = req.body.type;
+
+//   const newItem = new AddItems ({
+//     itemName,
+//     category,
+//     description,
+//     phoneNumber,
+//     image,
+//     type
+//   });
+  
+//   newItem.save()
+//   .then(() => res.json("Item Added!"))
+//   .catch(err => res.status(400).json("Error: " + err));
+// });
+
+
 router.route('/add').post((req, res) => {
   const itemName = req.body.itemName;
   const category = req.body.category;
   const description = req.body.description;
   const phoneNumber = req.body.phoneNumber;
-  const image = req.body.url;
-  // const url = req.body.url;
+  const image=req.body.image;
   const type = req.body.type;
+  console.log(image,"i am the image in post request in server side")
 
   const newItem = new AddItems ({
     itemName,
@@ -29,7 +52,6 @@ router.route('/add').post((req, res) => {
     description,
     phoneNumber,
     image,
-    // url,
     type
   });
   
@@ -37,6 +59,7 @@ router.route('/add').post((req, res) => {
   .then(() => res.json("Item Added!"))
   .catch(err => res.status(400).json("Error: " + err));
 });
+
 
 //GET item by ID
 router.route("/:id").get((req, res) => {
@@ -62,7 +85,7 @@ router.route("/update/:id", ).post((req, res) => {
     items.phoneNumber = req.body.phoneNumber;
     items.type = req.body.type;
     items.image = req.body.url;
-    // items.url = req.body.url;
+
     items.save()
     .then(() => res.json("Item is updated!"))
     .catch(err => res.status(400).json('Error: ' + err));
