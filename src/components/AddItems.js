@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 import {withRouter } from "react-router-dom" ;
 import Footer from './Footer';
+import { storage } from "../firebase.js"
 
 
  class AddItems extends Component {
@@ -16,13 +17,16 @@ import Footer from './Footer';
     this.onSubmit = this.onSubmit.bind(this);
     this.onChangeimg = this.onChangeimg.bind(this);
     this.onChangetype = this.onChangetype.bind(this);
+    this.handleUpload = this.handleUpload.bind(this)
+
 
     this.state = {
       itemName: "",
       category : "Women",
       description: "",
       phoneNumber: "",
-      image : "",
+      image : null,
+      url: "",
       type:"Jacket"
     }
   }
@@ -65,10 +69,44 @@ import Footer from './Footer';
 
 
   onChangeimg(e) {
-    this.setState({
-      image : e.target.value
-    });
+    if(e.target.files[0]){
+      this.setState({
+          image : e.target.files[0]
+         
+        });
+    }else console.log("error in onchangeimg")
+
+  
   }
+
+  handleUpload() {
+    // e.preventDefault();
+    const uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {},
+      error => {
+        console.log(error, "error");
+      },
+      () => {
+        storage
+        .ref("images")
+        .child(this.state.image.name)
+        .getDownloadURL()
+        .then(url => {
+          this.setState({
+            url: url
+            
+          })
+
+        });
+
+      }
+    )
+
+  }
+
+
 
   onSubmit(e) {
     e.preventDefault();
@@ -78,24 +116,26 @@ import Footer from './Footer';
       description: this.state.description,
       phoneNumber: this.state.phoneNumber,
       type:this.state.type,
-      image:this.state.image
+      image:this.state.url
     }
 
     console.log(item);
 
     axios.post("http://localhost:3000/addItems/add", item)
-      .then(res => console.log(res.data));
+      .then(res => console.log(res.data, "nooooooo"));
 
     window.location = '/ItemsList'
   }
 
+
   render() {
+    console.log("image", this.state.image)
     return (
       <div>
         <br />
         <div className = "container">
        
-          <form className="text-center border border-light p-9" action="#!" onSubmit = {this.onSubmit} >
+          <form className="text-center border border-light p-9" action="#!" onSubmit = {this.onSubmit}>
 
             <h3> "Only by giving are you able to receive more than you already have." -Jim Rohn </h3>
 
@@ -183,17 +223,21 @@ import Footer from './Footer';
                 <div className = "col">
                     <label>Add Image as URL</label>
                     <input 
-                      type = "text" 
+                      type = "file" 
                       required="true"
                       className = "form-control" 
-                      value = {this.state.image} 
+                      // value = {this.state.image} 
                       onChange = {this.onChangeimg}/>
+                      <button onClick = {this.handleUpload}>Upload</button>
+                      <br />
+     
+                      <img src = {this.state.url || "http://via.placeholder.com/100x150"} alt = "firebase-image" />
                   </div>  
 
                   <br />
 
                 <div>
-                <button type="submit" value = "Submit" className="btn btn-deep-orange darken-4">Submit</button>
+                <button type="submit" className="btn btn-deep-orange darken-4" >Submit</button>
                 </div>
 
           </form>

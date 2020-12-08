@@ -33,7 +33,7 @@ export default class EditItems extends Component {
           category: response.data.category,
           description: response.data.description,
           phoneNumber: response.data.phoneNumber,
-          image: response.data.image,
+          image: response.data.url,
           type: response.data.type,
         });
       })
