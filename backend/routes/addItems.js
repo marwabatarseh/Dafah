@@ -8,7 +8,10 @@ const AddItems = require('../models/addItems.model');
 //GET all items
 router.route('/').get( (req, res) => {
   AddItems.find() 
-  .then(items => res.json(items))
+  .then(items => {
+    res.json(items)
+    console.log(items,"serveeeer")
+  })
   .catch(err => res.status(400).json('Error: ' + err));
   
 });
