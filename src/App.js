@@ -13,6 +13,7 @@ import ItemsList from './components/ItemsList';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import EditItems from './components/edit';
+import Conditional from './components/conditional';
 
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
         <Route path = "/addUser"  component = { Signup } />
         <Route path = "/login" component = { Login } />
         <Route path = "/edit/:id" component = { EditItems }/>
-        {/* <Route path = "/logout" component = { Login } /> */}
+        <Route path = "/Conditional" component = { Conditional } /> 
     
       </div>
     </Router>

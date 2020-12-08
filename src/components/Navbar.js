@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-// import { token, logout } from '../verifyToken';
+// import { Link } from 'react-router-dom';
+
 
 
 export default class Navbar extends Component {
@@ -18,15 +19,15 @@ export default class Navbar extends Component {
           <li className="navbar-item">
           <Link to="/ItemsList" className="nav-link">Clothes</Link>
           </li>
-          {/* {!token() && (
-                <li className="navbar-item">
-                 <Link to="/login" className="nav-link">Login</Link> */}
+          {/* {!token} */}
           <li className="navbar-item">
           <Link to="/login" className="nav-link">Login</Link>
           </li>
-          <li className="navbar-item"onClick={logout}>
+          {/* {token} */}
+          {/* <li className="navbar-item"onClick={logout}>
           <Link to="/logout" className="nav-link">Log out</Link>
-          </li>
+          </li> */}
+          {/* https://www.digitalocean.com/community/tutorials/7-ways-to-implement-conditional-rendering-in-react-applications */}
         </ul>
         </div>
       </nav>

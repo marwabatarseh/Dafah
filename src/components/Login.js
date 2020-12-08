@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Footer from './Footer';
 
-
-
-
 export default class Login extends Component {
   
     constructor(props) {
-        super(props)  
+        super(props) 
+         
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
 
