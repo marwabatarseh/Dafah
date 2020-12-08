@@ -3,7 +3,7 @@ import { Link ,withRouter } from "react-router-dom" ;
 import axios from "axios";
 import Footer from './Footer';
 
-//
+//hi
 const ClothesItem = props => (
     <tr>
         <td>{props.item.itemName}</td>
