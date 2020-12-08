@@ -3,14 +3,10 @@ const AddUser = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const jwt =require('jsonwebtoken');
 
-
-
-
 router.route('/').get((req, res) => {
       AddUser.find()
     .then(users => res.json(users))
     .catch(err => res.status(400).json('Error: ' + err));
-  
   });
 
   router.route('/adduser').post(async (req, res) => {
@@ -30,46 +26,71 @@ router.route('/').get((req, res) => {
   //sorry it is a mass it is leterlly 2 am
   const salt = await bcrypt.genSalt(10)
    const hashedPassword =  await bcrypt.hash(req.body.password, salt)
+  console.log( "  the hasheeeeeeeeeed pasword is" , hashedPassword)
   const phone = req.body.phone;
   const address = req.body.address;
 //every thing is readdy here we send the data to the server  
    const newUser = new AddUser({username:username,password:hashedPassword, phone: phone, address:address });
    try{
    const saveUser= await newUser.save()
+     
       res.send({saveUser:newUser._id})
      // const token = jwt.sign({_id: newUser._id}, process.env.JWT_SECRET )
     //   console.log(token)
     //localStorage.setItem('token', token)
      //res.header('addUser-token',token).send(token);
      //res.json({ token: token})
-     console.log(token)
+     
    }catch(err){
      res.status(400).send(err)
    }
-  
- 
     });
 
     ///loggingggg innnn
     router.route('/login').post(async (req, res) => {
 
     //checking if the username is signed up 
-
       const user = await AddUser.findOne({username: req.body.username})
-      if (!user) {return res.status(400).send("there is no account with this username,please check your username?")};
+      if (!user) {
+        console.log("no username ..........")
+        res.status(404).json({ errors });
+          // stop further execution in this callback
+          return;
+      };
 
     //checking if password is correct
-
       const validpassword = await bcrypt.compare(req.body.password, user.password)
       if (!validpassword) return res.status(400).send('Password not correct');
 
     //creat and send a token
-    
       const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET );
-     res.header('addUser-token',token).send(token);
-     //console.log(res.header)
+      console.log("toooooooooooooooooooooooken ..........", token)
+    // res.header('addUser-token',token).send(token);
+           res.send(token);
        });
+
   
+/// verify the token for authorization 
+       router.route('/verify').post(async (req, res) => {
+        console.log (req.body.data, "veryyyyyyyyyyyyyyyyyyyyy")
+        const token = req.body.data;
+        
+    if (token){
+    jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken)=> {
+        if(err){
+            console.log("errrrrrrrrrrrror no token")
+        res.redirect('/login');
+        } else {
+        console.log(decodedToken)
+          res.send('you are authenticated');
+        }
+       
+    })
+    }
+    else{
+        res.redirect('/login');
+    }
+  });
     
 
     module.exports= router;
