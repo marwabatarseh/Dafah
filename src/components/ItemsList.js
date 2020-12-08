@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Link ,withRouter } from "react-router-dom" ;
 import axios from "axios";
 import Footer from './Footer';
-
-
 const ClothesItem = props => (
     <tr>
         <td>{props.item.itemName}</td>
@@ -59,9 +57,6 @@ class ItemsList extends Component {
             return <ClothesItem item = { currentItem } deleteItem = { this.deleteItem } key = { currentItem._id }/>; 
         })
     } 
-  
-
-
     onChangecategory(e){
         let { items } = this.state 
         let string = e.target.value
@@ -72,8 +67,6 @@ class ItemsList extends Component {
         let filteredItems = items.filter(item => item.category.includes(string))
         this.setState({filteredItems:filteredItems})
     }
-
-
     onChangetype(e){
         let { filteredItems } = this.state 
         let string = e.target.value
