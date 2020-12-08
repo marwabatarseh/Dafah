@@ -30,7 +30,8 @@ export default class Cards extends Component {
                   } else if (localStorage.length < 1) {
                     window.location = "/login";
                   }
-                }}>
+                }}
+              >
                 Donate Your Item
               </button>
             </Card.Body>

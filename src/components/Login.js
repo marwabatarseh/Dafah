@@ -58,7 +58,8 @@ export default class Login extends Component {
         <div className="container">
           <form
             className="text-center border border-light p-9"
-            onSubmit={this.onSubmit}>
+            onSubmit={this.onSubmit}
+          >
             <h3 className="mb-3">Login</h3>
             <br />
             <div className="col">

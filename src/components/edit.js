@@ -83,7 +83,7 @@ export default class EditItems extends Component {
     axios
       .post(
         "http://localhost:3000/addItems/update/" + this.props.match.params.id,
-        item,
+        item
       )
       .then((res) => console.log(res.data));
 
@@ -96,7 +96,8 @@ export default class EditItems extends Component {
         <form
           className="text-center border border-light p-5"
           action="#!"
-          onSubmit={this.onSubmit}>
+          onSubmit={this.onSubmit}
+        >
           <h3>
             {" "}
             "Only by giving are you able to receive more than you already have."
@@ -126,7 +127,8 @@ export default class EditItems extends Component {
               required
               className="form-control"
               value={this.state.category}
-              onChange={this.onChangeCategory}>
+              onChange={this.onChangeCategory}
+            >
               <option value="Women">Women</option>
               <option value="Men">Men</option>
               <option value="Kids">Kids</option>
@@ -141,7 +143,8 @@ export default class EditItems extends Component {
               required
               className="form-control"
               value={this.state.type}
-              onChange={this.onChangetype}>
+              onChange={this.onChangetype}
+            >
               <option value="Shose">Shose</option>
               <option value="Dress">Dress</option>
               <option value="Jacket">Jacket</option>
