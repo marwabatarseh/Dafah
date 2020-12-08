@@ -16,7 +16,7 @@ router.route('/').get( (req, res) => {
   
 });
 
-//POST(CREATE) new item
+//POST(CREATE) new item ....
 // router.route('/add').post((req, res) => {
 //   const itemName = req.body.itemName;
 //   const category = req.body.category;
