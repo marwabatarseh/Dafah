@@ -1,70 +1,38 @@
-import React, { Component } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import Footer from './Footer';
+import { useHistory } from "react-router-dom";
+import usercontext from "./context";
 
-export default class Login extends Component {
-  
-    constructor(props) {
-        super(props) 
-         
-        this.onChangeUsername = this.onChangeUsername.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
+export default function Login(){
 
-        this.onSubmit = this.onSubmit.bind(this);
-        this.state = {
-            username: '',
-            password:''
-                     }
-    }
-
-    onChangeUsername(e) {
-            
-        this.setState({
-         username : e.target.value 
-
-        })
+  const [username, setusername] = useState();
+  const [password, setPassword] = useState();
+  const [error, setError] = useState();
+  const { setUserData } = useContext(usercontext)
+  const history = useHistory();
+    const submit = async (e) => { 
+      e.preventDefault();
+      try {
+        const loginUser = { username, password };
+        const loginRes = await axios.post('http://localhost:8000/addUser/login', loginUser);
+        setUserData({
+          token: loginRes.data.token,
+          user: loginRes.data.user,
+        });
+        localStorage.setItem("aaddUser-token", loginRes.data.token);
+        history.push("/AddItems")
+      } catch (err) {
+        err.response.data.msg && setError(err.response.data.msg);
+        console.log(err.response.data.msg)
       }
-      onChangePassword(e) {
-        
-        this.setState({
-        password : e.target.value
-        })
-      }
-
-      onSubmit(e) {
-        e.preventDefault();
-    //where we set the state and send it in the post request
-        const user = {
-          username: this.state.username,
-          password: this.state.password
-        } 
-        
-        axios.post("http://localhost:3000/addUser/login", user)
-        .then(response =>{
-
-          console.log (response, " toooooooooooooooooooken")
-          window.localStorage.setItem('token', response.data);
-            /// after signing the token , verify the token 
-          axios.post("http://localhost:3000/addUser/verify",  response)
-          .then(response =>{
-  
-            console.log (response, "You are authenticated")
-             window.location = '/AddItems'
-  
-          })
-          .catch(err =>alert("Incorrect token"));         
-
-        })
-        .catch(err =>alert("username or password is incorrect"));         
-    }
-
-
-    render(){
+    };
         return (
                <div>
                <br />
                <div className = "container">
-                <form className="text-center border border-light p-9" onSubmit={this.onSubmit}>
+                <form className="text-center border border-light p-9" onSubmit={submit}>
+   {error && <div message={error} clearError={()=> setError(undefined)} />}
                 <h3 className = "mb-3">
                 Login
                 </h3>
@@ -72,14 +40,14 @@ export default class Login extends Component {
                 <div className="col">
                 <label > User Name </label>
                 <br></br>
-                <input required = "true" className = "col" type='text' className="form-control" value= {this.setState.username}onChange={this.onChangeUsername} placeholder='Enter Your User Name'/>                   
+                <input required = {true} type='text' className="form-control" onChange={ e => setusername(e.target.value)} placeholder='Enter Your UserName'/>                   
                 <br></br>
                 </div>
                 <br></br>
                 <div className="col">
                 <label > Password </label>
                 <br></br>
-                <input required = "true"  className = "col" type="password" name="password" className="form-control col"value= {this.setState.password} onChange={this.onChangePassword} placeholder='Enter Your Password' />
+                <input required = {true} type="password" name="password" className="form-control col" onChange={ e => setPassword(e.target.value)} placeholder='Enter Your Password' />
                 </div>
                 <br></br>
                 <input type='submit' value='Log In' className="btn btn-deep-orange darken-4"/>
@@ -91,6 +59,4 @@ export default class Login extends Component {
              <Footer />
              </div>
         )  
-    }
 }
-

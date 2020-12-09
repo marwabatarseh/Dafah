@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
+import Conditional from './Conditional';
 
 
 
 export default class Navbar extends Component {
-
   render() {
     return (
       <div>
@@ -17,17 +16,15 @@ export default class Navbar extends Component {
           <Link to="/AddItems" className="nav-link">Add Items</Link>
           </li>
           <li className="navbar-item">
-          <Link to="/ItemsList" className="nav-link">Clothes</Link>
+          <Link to="/ItemsList" className="nav-link">View Items</Link>
           </li>
-          {/* {!token} */}
-          <li className="navbar-item">
+          <Conditional/>
+          {/* <li className="navbar-item">
           <Link to="/login" className="nav-link">Login</Link>
-          </li>
-          {/* {token} */}
+          </li> */}
           {/* <li className="navbar-item"onClick={logout}>
           <Link to="/logout" className="nav-link">Log out</Link>
           </li> */}
-          {/* https://www.digitalocean.com/community/tutorials/7-ways-to-implement-conditional-rendering-in-react-applications */}
         </ul>
         </div>
       </nav>
@@ -35,11 +32,7 @@ export default class Navbar extends Component {
     );
   }
 }
-
-
- function logout(){
-
-  window.localStorage.clear();
-  window.location = '/Homepage'
-
- }
+//  function logout(){
+//   window.localStorage.clear();
+//   window.location = '/Homepage'
+//  }
