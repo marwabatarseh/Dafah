@@ -11,16 +11,14 @@ export default class EditItems extends Component {
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangePhoneNumber = this.onChangePhoneNumber.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.onChangeimg = this.onChangeimg.bind(this);
     this.onChangetype = this.onChangetype.bind(this);
 
     this.state = {
       itemName: "",
-      category: "Women",
+      category: "",
       description: "",
       phoneNumber: "",
-      image: "",
-      type: "Jacket",
+      type: "",
     };
   }
 
@@ -33,7 +31,6 @@ export default class EditItems extends Component {
           category: response.data.category,
           description: response.data.description,
           phoneNumber: response.data.phoneNumber,
-          image: response.data.url,
           type: response.data.type,
         });
       })
@@ -71,11 +68,6 @@ export default class EditItems extends Component {
       phoneNumber: e.target.value,
     });
   }
-  onChangeimg(e) {
-    this.setState({
-      image: e.target.value,
-    });
-  }
 
   onSubmit(e) {
     e.preventDefault();
@@ -85,14 +77,13 @@ export default class EditItems extends Component {
       description: this.state.description,
       phoneNumber: this.state.phoneNumber,
       type: this.state.type,
-      image: this.state.image,
     };
     console.log(item);
 
     axios
       .post(
         "http://localhost:3000/addItems/update/" + this.props.match.params.id,
-        item,
+        item
       )
       .then((res) => console.log(res.data));
 
@@ -105,7 +96,8 @@ export default class EditItems extends Component {
         <form
           className="text-center border border-light p-5"
           action="#!"
-          onSubmit={this.onSubmit}>
+          onSubmit={this.onSubmit}
+        >
           <h3>
             {" "}
             "Only by giving are you able to receive more than you already have."
@@ -135,7 +127,8 @@ export default class EditItems extends Component {
               required
               className="form-control"
               value={this.state.category}
-              onChange={this.onChangeCategory}>
+              onChange={this.onChangeCategory}
+            >
               <option value="Women">Women</option>
               <option value="Men">Men</option>
               <option value="Kids">Kids</option>
@@ -150,7 +143,8 @@ export default class EditItems extends Component {
               required
               className="form-control"
               value={this.state.type}
-              onChange={this.onChangetype}>
+              onChange={this.onChangetype}
+            >
               <option value="Shose">Shose</option>
               <option value="Dress">Dress</option>
               <option value="Jacket">Jacket</option>
@@ -189,20 +183,8 @@ export default class EditItems extends Component {
           <br />
 
           <div>
-            <div className="addimg">
-              <label>Add Image URL</label>
-              <input
-                type="text"
-                className="form-control"
-                value={this.state.image}
-                onChange={this.onChangeimg}
-              />
-            </div>
-          </div>
-
-          <div>
             <button type="submit" value="Submit" className="btn btn-dark">
-              Edit
+              Save
             </button>
           </div>
         </form>
